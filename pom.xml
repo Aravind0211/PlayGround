@@ -17,10 +17,10 @@
     
     <!-- Properties -->
     <properties>
-        <java.version>1.8</java.version>
-        <spring.boot.version>1.4.2.RELEASE</spring.boot.version>
-        <spring.boot.eureka.version>1.2.2.RELEASE</spring.boot.eureka.version>
-        <lombok.version>1.18.20</lombok.version> <!-- Updated to the latest stable version -->
+        <java.version>17</java.version> <!-- Update to a more recent Java version -->
+        <spring.boot.version>3.2.0</spring.boot.version> <!-- Updated to a more recent stable version -->
+        <spring.boot.eureka.version>3.2.0</spring.boot.eureka.version> <!-- Updated to a compatible version -->
+        <lombok.version>1.18.32</lombok.version> <!-- Updated to the latest stable version -->
     </properties>
     
     <!-- Modules -->
@@ -44,7 +44,7 @@
         <!-- Spring Cloud Starter Eureka for service discovery -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka</artifactId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
             <version>${spring.boot.eureka.version}</version>
         </dependency>
         
@@ -61,27 +61,27 @@
     <build>
         <plugins>
             <!-- Maven Compiler Plugin -->
-             <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.8.1</version> <!-- Use the latest version -->
-            <configuration>
-                <source>1.8</source> <!-- Adjust according to your JDK version -->
-                <target>1.8</target> <!-- Adjust according to your JDK version -->
-                <encoding>UTF-8</encoding>
-                <compilerArgs>
-                    <arg>--add-opens</arg>
-                    <arg>jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED</arg>
-                </compilerArgs>
-                <annotationProcessorPaths>
-                    <path>
-                        <groupId>org.projectlombok</groupId>
-                        <artifactId>lombok</artifactId>
-                        <version>${lombok.version}</version>
-                    </path>
-                </annotationProcessorPaths>
-            </configuration>
-        </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version> <!-- Use the latest version -->
+                <configuration>
+                    <source>${java.version}</source> <!-- Adjust according to your JDK version -->
+                    <target>${java.version}</target> <!-- Adjust according to your JDK version -->
+                    <encoding>UTF-8</encoding>
+                    <compilerArgs>
+                        <arg>--add-exports</arg>
+                        <arg>jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED</arg>
+                    </compilerArgs>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
             
             <!-- Lombok Maven Plugin -->
             <plugin>
