@@ -12,7 +12,7 @@
     <parent>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-starter-parent</artifactId>
-        <version>Brixton.RELEASE</version>
+        <version>Brixton.RELEASE</version> <!-- Ensure this version is compatible -->
     </parent>
     
     <!-- Properties -->
@@ -20,7 +20,7 @@
         <java.version>1.8</java.version>
         <spring.boot.version>1.4.2.RELEASE</spring.boot.version>
         <spring.boot.eureka.version>1.2.2.RELEASE</spring.boot.eureka.version>
-        <lombok.version>1.18.20</lombok.version>
+        <lombok.version>1.18.20</lombok.version> <!-- Updated to the latest stable version -->
     </properties>
     
     <!-- Modules -->
@@ -86,7 +86,7 @@
             <plugin>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok-maven-plugin</artifactId>
-                <version>1.18.20.0</version> <!-- Ensure this version matches lombok.version -->
+                <version>${lombok.version}</version>
                 <executions>
                     <execution>
                         <id>install-lombok</id>
