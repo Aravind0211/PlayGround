@@ -1,23 +1,29 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         
     <modelVersion>4.0.0</modelVersion>
     <groupId>pl.piomin</groupId>
     <artifactId>sample-spring-microservices</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-
+    
+    <!-- Parent POM -->
     <parent>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-starter-parent</artifactId>
         <version>Brixton.RELEASE</version>
     </parent>
-
+    
+    <!-- Properties -->
     <properties>
         <java.version>1.8</java.version>
-        <spring.boot>1.4.2.RELEASE</spring.boot>
-        <spring.boot.eureka>1.2.2.RELEASE</spring.boot.eureka>
+        <spring.boot.version>1.4.2.RELEASE</spring.boot.version>
+        <spring.boot.eureka.version>1.2.2.RELEASE</spring.boot.eureka.version>
+        <lombok.version>1.18.12</lombok.version>
     </properties>
-
+    
+    <!-- Modules -->
     <modules>
         <module>discovery-service</module>
         <module>account-service</module>
@@ -25,13 +31,59 @@
         <module>customer-service</module>
         <module>zipkin-service</module>
     </modules>
-
+    
+    <!-- Dependencies -->
     <dependencies>
+        <!-- Spring Boot Starter Web for RESTful services -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
+        
+        <!-- Spring Cloud Starter Eureka for service discovery -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka</artifactId>
+            <version>${spring.boot.eureka.version}</version>
+        </dependency>
+        
+        <!-- Lombok for reducing boilerplate code -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.12</version>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
-
+    
+    <!-- Plugin Management -->
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Maven Compiler Plugin for compilation tasks -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.1</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <encoding>UTF-8</encoding>
+                        <compilerArgs>
+                            <arg>-parameters</arg>
+                        </compilerArgs>
+                    </configuration>
+                </plugin>
+                
+                <!-- Spring Boot Maven Plugin for building executable JAR/WAR -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring.boot.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+    
 </project>
